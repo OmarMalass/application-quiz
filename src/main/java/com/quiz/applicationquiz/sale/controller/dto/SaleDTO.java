@@ -27,13 +27,13 @@ public class SaleDTO {
     private long clientID;
 
     @JsonProperty
-    private List<Long> transactions;
+    private List<TransactionDTO> transactions;
 
     public SaleDTO(Sale sale) {
         ID = sale.getID();
         total = sale.getTotal();
         salespersonID = sale.getSalesperson().getID();
         clientID = sale.getClient().getID();
-        transactions = sale.getTransactions().stream().map(Transaction::getID).collect(Collectors.toList());
+        transactions = sale.getTransactions().stream().map(TransactionDTO::new).collect(Collectors.toList());
     }
 }
