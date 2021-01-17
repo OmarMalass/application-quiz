@@ -7,11 +7,16 @@ import com.quiz.applicationquiz.sale.controller.dto.TransactionDTO;
 import com.quiz.applicationquiz.sale.model.Sale;
 import com.quiz.applicationquiz.sale.model.Transaction;
 import com.quiz.applicationquiz.sale.repository.TransactionRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TransactionService {
+
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
     @Autowired
     private TransactionRepository repository;
@@ -33,6 +38,8 @@ public class TransactionService {
                         .setUnitPrice(transactionDTO.getUnitPrice());
 
         repository.save(transaction);
+        logger.info("Created transaction: " + transaction.toString());
+
         sale.getTransactions().add(transaction);
         saleService.update(sale);
         return transaction;
@@ -45,6 +52,7 @@ public class TransactionService {
     public boolean deleteByID(long ID) {
         if (repository.existsById(ID)) {
             repository.deleteById(ID);
+            logger.info("Deleted transaction: " + ID);
             return true;
         }
         return false;
@@ -60,6 +68,7 @@ public class TransactionService {
         if (transaction != null) {
             updateNonNull(transaction, transactionDTO);
             repository.save(transaction);
+            logger.info("Updated transaction: " + transaction.toString());
         }
         return transaction;
     }

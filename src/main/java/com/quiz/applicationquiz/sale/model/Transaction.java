@@ -39,4 +39,9 @@ public class Transaction {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", insertable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date createdAt;
+
+    @Override
+    public String toString() {
+        return "Transaction={ID: " + ID + ", productID:" + product.getID() + ", quantity: " + quantity + ", unitPrice: " + unitPrice + "saleID: " + sale.getID() + "}";
+    }
 }
