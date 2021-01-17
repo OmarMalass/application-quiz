@@ -49,4 +49,18 @@ public class TransactionService {
         }
         return false;
     }
+
+    private void updateNonNull(Transaction transaction, TransactionDTO transactionDTO) {
+        if (transactionDTO.getUnitPrice() != null) transaction.setUnitPrice(transactionDTO.getUnitPrice());
+        if (transactionDTO.getQuantity() != null) transaction.setQuantity(transactionDTO.getQuantity());
+    }
+
+    public Transaction update(TransactionDTO transactionDTO) {
+        Transaction transaction = repository.findById(transactionDTO.getID()).orElse(null);
+        if (transaction != null) {
+            updateNonNull(transaction, transactionDTO);
+            repository.save(transaction);
+        }
+        return transaction;
+    }
 }

@@ -25,6 +25,11 @@ public class TransactionController {
         return new TransactionDTO(transaction);
     }
 
+    @PostMapping("/update")
+    TransactionDTO update(@RequestBody TransactionDTO transactionDTO) {
+        Transaction transaction = service.update(transactionDTO);
+        return new TransactionDTO(transaction);
+    }
 
     @DeleteMapping("/delete/{ID}")
     public boolean delete(@PathVariable long ID) {

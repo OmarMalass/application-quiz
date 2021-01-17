@@ -16,10 +16,10 @@ public class TransactionDTO {
     @JsonProperty("id")
     private long ID;
 
-    private int quantity;
+    private Integer quantity;
 
     @JsonProperty("unit_price")
-    private double unitPrice;
+    private Double unitPrice;
 
     @JsonProperty("sale_id")
     private long saleID;
